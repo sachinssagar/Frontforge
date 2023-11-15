@@ -11,11 +11,13 @@ import {
   EditPost,
   DeletePost,
 } from "./routes/AllRoutes";
+import { MainPage } from "./pages/MainPage";
 
 export const { VITE_SOME_KEY } = import.meta.env;
 const App = () => {
   return (
     <Routes>
+      <Route path="/" element={<MainPage />} />
       <Route path="/books" element={<Homebook />} />
       <Route path="/books/create" element={<CreateBook />} />
       <Route path="/books/:id" element={<ShowBook />} />
