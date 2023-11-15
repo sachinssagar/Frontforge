@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const MainPage = () => {
+export const MainPage = () => {
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">
       <div className="text-center">
@@ -29,5 +29,3 @@ const MainPage = () => {
     </div>
   );
 };
-
-export default MainPage;
