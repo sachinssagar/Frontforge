@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const [user, setuser] = useState("");
-  // const isLoggedIn = false;
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
   const logout = () => {
@@ -16,7 +15,6 @@ export const Header = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
 
     axios
       .get(`${VITE_API}/auth/profile`, {
@@ -27,15 +25,13 @@ export const Header = () => {
       .then((res) => {
         setuser(res.data.user);
         setIsLoggedIn(true);
-        console.log(res.data);
       })
       .catch((err) => {
-        console.log(err);
         setIsLoggedIn(false);
+        console.log(err);
       });
   }, []);
 
-  console.log(user);
   return (
     <header className="bg-gray-800 text-white p-4">
       <div className="flex items-center justify-between">
