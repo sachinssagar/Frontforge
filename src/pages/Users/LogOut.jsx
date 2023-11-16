@@ -11,7 +11,7 @@ export const Logout = () => {
 
   return (
     <div>
-      <h1>Logout</h1>
+      <h1>Logsadsaddsaasdasdasdasdsadsaout</h1>
     </div>
   );
 };
