@@ -20,7 +20,7 @@ export const MainPage = () => {
                 to="/posts"
                 className="text-green-500 hover:underline transition duration-300"
               >
-                Go to Postsasa
+                Go to Posts
               </Link>
             </li>
           </ul>
