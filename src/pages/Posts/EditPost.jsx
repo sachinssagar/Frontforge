@@ -3,7 +3,7 @@ import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { VITE_SOME_KEY } from "../../App.jsx";
+import { VITE_API } from "../../App.jsx";
 
 export const EditPost = () => {
   const [title, setTitle] = useState("");
@@ -16,7 +16,7 @@ export const EditPost = () => {
     setIsLoading(true);
 
     axios
-      .get(`${VITE_SOME_KEY}/posts/${id}`)
+      .get(`${VITE_API}/posts/${id}`)
       .then((res) => {
         setTitle(res.data.title);
         setDescription(res.data.description);
@@ -38,7 +38,7 @@ export const EditPost = () => {
     setIsLoading(true);
 
     axios
-      .put(`${VITE_SOME_KEY}/posts/${id}`, data)
+      .put(`${VITE_API}/posts/${id}`, data)
       .then(() => {
         console.log(data);
         setIsLoading(false);

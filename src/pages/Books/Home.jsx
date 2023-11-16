@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
-import { VITE_SOME_KEY } from "../../App.jsx";
+import { VITE_API } from "../../App.jsx";
 
 export const Homebook = () => {
   const [books, setBooks] = useState([]);
@@ -14,7 +14,7 @@ export const Homebook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${VITE_SOME_KEY}/books`)
+      .get(`${VITE_API}/books`)
       .then((response) => {
         setBooks(response.data.data);
         setLoading(false);

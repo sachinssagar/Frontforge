@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
-import { VITE_SOME_KEY } from "../../App.jsx";
+import { VITE_API } from "../../App.jsx";
 
 export const ShowPost = () => {
   const [post, setPost] = useState({});
@@ -13,7 +13,7 @@ export const ShowPost = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`${VITE_SOME_KEY}/posts/${id}`)
+      .get(`${VITE_API}/posts/${id}`)
       .then((res) => {
         setPost(res.data);
         setIsLoading(false);

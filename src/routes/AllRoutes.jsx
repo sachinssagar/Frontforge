@@ -8,3 +8,10 @@ export { DeletePost } from "../pages/Posts/DeletePost";
 export { EditPost } from "../pages/Posts/EditPost";
 export { HomePost } from "../pages/Posts/Home";
 export { ShowPost } from "../pages/Posts/ShowPost";
+
+export { Login } from "../pages/Users/Login";
+export { Register } from "../pages/Users/Register";
+export { Update } from "../pages/Users/Update";
+export { Profile } from "../pages/Users/Profile";
+
+export { Header } from "../pages/Users/components/Header";

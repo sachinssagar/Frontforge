@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
-import { VITE_SOME_KEY } from "../../App.jsx";
+import { VITE_API } from "../../App.jsx";
 
 export const ShowBook = () => {
   const [book, setBook] = useState({});
@@ -13,7 +13,7 @@ export const ShowBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${VITE_SOME_KEY}/books/${id}`)
+      .get(`${VITE_API}/books/${id}`)
       .then((response) => {
         setBook(response.data);
         setLoading(false);

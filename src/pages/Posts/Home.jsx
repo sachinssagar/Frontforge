@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
-import { VITE_SOME_KEY } from "../../App.jsx";
+import { VITE_API } from "../../App.jsx";
 
 export const HomePost = () => {
   const [posts, setPosts] = useState([]);
@@ -14,7 +14,7 @@ export const HomePost = () => {
   useEffect(() => {
     setIsLoading(true);
     axios
-      .get(`${VITE_SOME_KEY}/posts`)
+      .get(`${VITE_API}/posts`)
       .then((res) => {
         setPosts(res.data.data);
         setIsLoading(false);

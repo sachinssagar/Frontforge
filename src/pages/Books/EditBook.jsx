@@ -3,7 +3,7 @@ import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { VITE_SOME_KEY } from "../../App.jsx";
+import { VITE_API } from "../../App.jsx";
 
 export const EditBook = () => {
   const [title, setTitle] = useState("");
@@ -16,7 +16,7 @@ export const EditBook = () => {
   useEffect(() => {
     setLoading(true);
     axios
-      .get(`${VITE_SOME_KEY}/books/${id}`)
+      .get(`${VITE_API}/books/${id}`)
       .then((response) => {
         setTitle(response.data.title);
         setAuthor(response.data.author);
@@ -38,7 +38,7 @@ export const EditBook = () => {
     };
     setLoading(true);
     axios
-      .put(`${VITE_SOME_KEY}/books/${id}`, data)
+      .put(`${VITE_API}/books/${id}`, data)
       .then(() => {
         console.log(data);
         setLoading(false);

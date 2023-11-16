@@ -3,7 +3,7 @@ import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { VITE_SOME_KEY } from "../../App.jsx";
+import { VITE_API } from "../../App.jsx";
 
 export const DeleteBook = () => {
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,7 @@ export const DeleteBook = () => {
   const handleDeleteBook = () => {
     setLoading(true);
     axios
-      .delete(`${VITE_SOME_KEY}/books/${id}`)
+      .delete(`${VITE_API}/books/${id}`)
       .then(() => {
         setLoading(false);
         navigate("/books");

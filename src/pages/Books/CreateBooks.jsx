@@ -3,7 +3,7 @@ import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { VITE_SOME_KEY } from "../../App.jsx";
+import { VITE_API } from "../../App.jsx";
 
 export const CreateBook = () => {
   const [title, setTitle] = useState("");
@@ -19,7 +19,7 @@ export const CreateBook = () => {
     };
     setLoading(true);
     axios
-      .post(`${VITE_SOME_KEY}/books`, data)
+      .post(`${VITE_API}/books`, data)
       .then(() => {
         setLoading(false);
         navigate("/books");
