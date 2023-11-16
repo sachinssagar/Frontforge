@@ -36,6 +36,12 @@ export const Update = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      alert("New password and confirm password do not match");
+      return;
+    }
+
     const token = localStorage.getItem("token");
     const data = {
       name,
