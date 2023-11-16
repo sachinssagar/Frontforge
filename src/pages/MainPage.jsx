@@ -23,14 +23,6 @@ export const MainPage = () => {
                 Go to Posts
               </Link>
             </li>
-            <li>
-              <Link
-                to="/profile"
-                className="text-red-500 hover:underline transition duration-300"
-              >
-                Go to Users
-              </Link>
-            </li>
           </ul>
         </nav>
       </div>

@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import {
   Homebook,
   CreateBook,
@@ -23,16 +22,9 @@ import { MainPage } from "./pages/MainPage";
 export const { VITE_API } = import.meta.env;
 
 const App = () => {
-  const location = useLocation();
-  const userPages = ["/login", "/register", "/update", "/profile"];
-
-  const shouldShowHeader = userPages.some((page) =>
-    location.pathname.startsWith(page)
-  );
-
   return (
     <>
-      {shouldShowHeader && <Header />}
+      <Header />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/books" element={<Homebook />} />
