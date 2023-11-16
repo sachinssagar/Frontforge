@@ -16,6 +16,7 @@ import {
   Update,
   Profile,
   Header,
+  Logout,
 } from "./routes/AllRoutes";
 import { MainPage } from "./pages/MainPage";
 
@@ -48,6 +49,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/update" element={<Update />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/logout" element={<Logout />} />
         <Route path="/header" element={<Header />} />
       </Routes>
     </>
