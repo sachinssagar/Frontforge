@@ -6,16 +6,15 @@ import { useNavigate } from "react-router-dom";
 
 export const Header = () => {
   const [user, setuser] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState("");
   const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
 
+  const token = localStorage.getItem("token");
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
     axios
       .get(`${VITE_API}/auth/profile`, {
         headers: {
@@ -40,7 +39,7 @@ export const Header = () => {
         </Link>
         <nav>
           <ul className="flex space-x-4">
-            {isLoggedIn ? (
+            {token ? (
               <>
                 <li>Hi {user.name}</li>
 
