@@ -1,35 +1,12 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { VITE_API } from "../../../App.jsx";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Header = () => {
-  const [user, setuser] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState("");
   const navigate = useNavigate();
   const logout = () => {
-    localStorage.removeItem("token");
+    localStorage.clear();
     navigate("/login");
   };
-
   const token = localStorage.getItem("token");
-  useEffect(() => {
-    axios
-      .get(`${VITE_API}/auth/profile`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((res) => {
-        setuser(res.data.user);
-        setIsLoggedIn(true);
-      })
-      .catch((err) => {
-        setIsLoggedIn(false);
-        console.log(err);
-      });
-  }, []);
 
   return (
     <header className="bg-gray-800 text-white p-4">
@@ -41,7 +18,7 @@ export const Header = () => {
           <ul className="flex space-x-4">
             {token ? (
               <>
-                <li>Hi {user.name}</li>
+                <li>Hi {JSON.stringify(token).name} </li>
 
                 <li>
                   <Link to="/profile">Profile</Link>
