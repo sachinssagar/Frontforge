@@ -4,11 +4,13 @@ import Spinner from "../../components/Spinner";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { VITE_API } from "../../App.jsx";
+import { Button, Container, Row, Col } from "react-bootstrap";
 
 export const DeleteBook = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
+
   const handleDeleteBook = () => {
     setLoading(true);
     axios
@@ -23,21 +25,24 @@ export const DeleteBook = () => {
         console.log(err);
       });
   };
-  return (
-    <div className="p-4">
-      <BackButton />
-      <h1 className="text-3xl my-4">Delete Book</h1>
-      {loading ? <Spinner /> : ""}
-      <div className="flex flex-col items-center border-2 border-sky-400 rounded-xl w-[600px] p-8 mx-auto">
-        <h3 className="text-2xl">Are You Sure You want to delete this book?</h3>
 
-        <button
-          className="p-4 bg-red-600 text-white m-8 w-full"
+  return (
+    <Container className="my-4">
+      <BackButton />
+      <h1 className="text-center display-4 text-danger mb-4">Delete Book</h1>
+      {loading ? <Spinner /> : ""}
+      <div className="border border-danger rounded p-4 text-center">
+        <h3 className="text-2xl mb-4">
+          Are You Sure You want to delete this book?
+        </h3>
+        <Button
+          variant="danger"
+          className="p-4 text-white m-8 w-100"
           onClick={handleDeleteBook}
         >
           Yes, Delete it
-        </button>
+        </Button>
       </div>
-    </div>
+    </Container>
   );
 };

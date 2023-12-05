@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import { VITE_API } from "../../App.jsx";
+import { Container, Form, Button } from "react-bootstrap";
 
 export const ShowBook = () => {
   const [book, setBook] = useState({});
@@ -25,39 +26,86 @@ export const ShowBook = () => {
   }, []);
 
   return (
-    <div className="p-4">
+    <Container className="my-4">
       <BackButton />
-      <h1 className="text-3xl my-4">Show Book</h1>
+      <h1 className="text-center display-4 text-primary mb-4">Book Details</h1>
       {loading ? (
         <Spinner />
       ) : (
-        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4">
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Id</span>
-            <span>{book._id}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Title</span>
-            <span>{book.title}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Author</span>
-            <span>{book.author}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Publish Year</span>
-            <span>{book.publishYear}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Create Time</span>
-            <span>{new Date(book.createdAt).toString()}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Last Update Time</span>
-            <span>{new Date(book.updatedAt).toString()}</span>
-          </div>
-        </div>
+        <Form className="border border-primary rounded p-3">
+          <Form.Group controlId="formId" className="mb-3">
+            <Form.Label className="text-xl text-primary">
+              <strong>Id:</strong>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={book._id}
+              readOnly
+              className="border border-primary p-2"
+            />
+          </Form.Group>
+          <Form.Group controlId="formTitle" className="mb-3">
+            <Form.Label className="text-xl text-primary">
+              <strong>Title:</strong>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={book.title}
+              readOnly
+              className="border border-primary p-2"
+            />
+          </Form.Group>
+          <Form.Group controlId="formAuthor" className="mb-3">
+            <Form.Label className="text-xl text-primary">
+              <strong>Author:</strong>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={book.author}
+              readOnly
+              className="border border-primary p-2"
+            />
+          </Form.Group>
+          <Form.Group controlId="formPublishYear" className="mb-3">
+            <Form.Label className="text-xl text-primary">
+              <strong>Publish Year:</strong>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={book.publishYear}
+              readOnly
+              className="border border-primary p-2"
+            />
+          </Form.Group>
+          <Form.Group controlId="formCreateTime" className="mb-3">
+            <Form.Label className="text-xl text-primary">
+              <strong>Create Time:</strong>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={new Date(book.createdAt).toLocaleString()}
+              readOnly
+              className="border border-primary p-2"
+            />
+          </Form.Group>
+          <Form.Group controlId="formUpdateTime" className="mb-3">
+            <Form.Label className="text-xl text-primary">
+              <strong>Last Update Time:</strong>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={new Date(book.updatedAt).toLocaleString()}
+              readOnly
+              className="border border-primary p-2"
+            />
+          </Form.Group>
+          <Link to={`/books/edit/${book._id}`}>
+            <Button variant="primary" className="w-100">
+              Edit Book
+            </Button>
+          </Link>
+        </Form>
       )}
-    </div>
+    </Container>
   );
 };

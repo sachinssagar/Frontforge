@@ -13,6 +13,6 @@ export { Login } from "../pages/Users/Login";
 export { Register } from "../pages/Users/Register";
 export { Update } from "../pages/Users/Update";
 export { Profile } from "../pages/Users/Profile";
-export { Logout } from "../pages/Users/Logout";
+// export { Logout } from "../pages/Users/Logout";
 
 export { Header } from "../pages/Users/components/Header";

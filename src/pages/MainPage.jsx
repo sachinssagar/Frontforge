@@ -2,29 +2,28 @@ import { Link } from "react-router-dom";
 
 export const MainPage = () => {
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div className="bg-light min-vh-100 d-flex align-items-center justify-content-center">
       <div className="text-center">
-        <h1 className="text-4xl font-bold mb-6">Welcome to the Main Page!</h1>
-        <nav className="flex items-center justify-center">
-          <ul className="flex space-x-4">
-            <li>
-              <Link
-                to="/books"
-                className="text-blue-500 hover:underline transition duration-300"
-              >
-                Go to Books
+        <h1 className="display-4 font-weight-bold text-primary mb-4">
+          Welcome to the Main Page!
+        </h1>
+        <nav className="d-flex justify-content-center">
+          <ul className="nav">
+            <li className="nav-item">
+              <Link to="/books" className="nav-link text-primary">
+                Explore Books
               </Link>
             </li>
-            <li>
-              <Link
-                to="/posts"
-                className="text-green-500 hover:underline transition duration-300"
-              >
-                Go to Posts
+            <li className="nav-item">
+              <Link to="/posts" className="nav-link text-success">
+                Discover Posts
               </Link>
             </li>
           </ul>
         </nav>
+        <p className="mt-4 text-muted">
+          Dive into the world of knowledge and creativity.
+        </p>
       </div>
     </div>
   );

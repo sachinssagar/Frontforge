@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import { VITE_API } from "../../App.jsx";
+import { Container, Form, Button } from "react-bootstrap";
 
 export const ShowPost = () => {
   const [post, setPost] = useState({});
@@ -26,35 +27,75 @@ export const ShowPost = () => {
   }, []);
 
   return (
-    <div className="p-4">
+    <Container className="my-4">
       <BackButton />
-      <h1 className="text-3xl my-4">Show Posts</h1>
+      <h1 className="text-center display-4 text-primary mb-4">Post Details</h1>
       {isLoading ? (
         <Spinner />
       ) : (
-        <div className="flex flex-col border-2 border-sky-400 rounded-xl w-fit p-4">
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Id</span>
-            <span>{post._id}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Title</span>
-            <span>{post.title}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Description</span>
-            <span>{post.description}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Create Time</span>
-            <span>{new Date(post.createdAt).toString()}</span>
-          </div>
-          <div className="my-4">
-            <span className="text-xl mr-4 text-gray-500">Last Update Time</span>
-            <span>{new Date(post.updatedAt).toString()}</span>
-          </div>
-        </div>
+        <Form className="border border-primary rounded p-4">
+          <Form.Group controlId="formId" className="mb-4">
+            <Form.Label className="text-xl text-primary">
+              <strong>Id:</strong>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={post._id}
+              readOnly
+              className="border border-primary p-2"
+            />
+          </Form.Group>
+          <Form.Group controlId="formTitle" className="mb-4">
+            <Form.Label className="text-xl text-primary">
+              <strong>Title:</strong>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={post.title}
+              readOnly
+              className="border border-primary p-2"
+            />
+          </Form.Group>
+          <Form.Group controlId="formDescription" className="mb-4">
+            <Form.Label className="text-xl text-primary">
+              <strong>Description:</strong>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={post.description}
+              readOnly
+              className="border border-primary p-2"
+            />
+          </Form.Group>
+          <Form.Group controlId="formCreateTime" className="mb-4">
+            <Form.Label className="text-xl text-primary">
+              <strong>Create Time:</strong>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={new Date(post.createdAt).toLocaleString()}
+              readOnly
+              className="border border-primary p-2"
+            />
+          </Form.Group>
+          <Form.Group controlId="formUpdateTime" className="mb-4">
+            <Form.Label className="text-xl text-primary">
+              <strong>Last Update Time:</strong>
+            </Form.Label>
+            <Form.Control
+              type="text"
+              value={new Date(post.updatedAt).toLocaleString()}
+              readOnly
+              className="border border-primary p-2"
+            />
+          </Form.Group>
+          <Link to={`/posts/edit/${post._id}`}>
+            <Button variant="primary" className="w-100">
+              Edit Post
+            </Button>
+          </Link>
+        </Form>
       )}
-    </div>
+    </Container>
   );
 };

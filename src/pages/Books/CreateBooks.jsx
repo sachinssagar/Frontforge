@@ -4,6 +4,7 @@ import Spinner from "../../components/Spinner";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { VITE_API } from "../../App.jsx";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 export const CreateBook = () => {
   const [title, setTitle] = useState("");
@@ -11,6 +12,7 @@ export const CreateBook = () => {
   const [publishYear, setPublishYear] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   const handleSaveBook = () => {
     const data = {
       title,
@@ -32,42 +34,58 @@ export const CreateBook = () => {
   };
 
   return (
-    <div className="p-4">
+    <Container className="my-4">
       <BackButton />
-      <h1 className="text-3xl my-4">Create Book</h1>
+      <h1 className="text-center display-4 text-primary mb-4">Create Book</h1>
       {loading ? <Spinner /> : ""}
-      <div className="flex flex-col border-2 border-sky-400 rounded-xl w-[600px] p-4 mx-auto">
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Title</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2 w-full"
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Author</label>
-          <input
-            type="text"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2  w-full "
-          />
-        </div>
-        <div className="my-4">
-          <label className="text-xl mr-4 text-gray-500">Publish Year</label>
-          <input
-            type="number"
-            value={publishYear}
-            onChange={(e) => setPublishYear(e.target.value)}
-            className="border-2 border-gray-500 px-4 py-2  w-full "
-          />
-        </div>
-        <button className="p-2 bg-sky-300 m-8" onClick={handleSaveBook}>
+      <Form className="border border-primary rounded p-4">
+        <Row className="mb-4">
+          <Col>
+            <Form.Group controlId="formTitle">
+              <Form.Label className="text-xl text-gray-500">Title</Form.Label>
+              <Form.Control
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="border border-gray-500 px-4 py-2"
+              />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group controlId="formAuthor">
+              <Form.Label className="text-xl text-gray-500">Author</Form.Label>
+              <Form.Control
+                type="text"
+                value={author}
+                onChange={(e) => setAuthor(e.target.value)}
+                className="border border-gray-500 px-4 py-2"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row className="mb-4">
+          <Col>
+            <Form.Group controlId="formPublishYear">
+              <Form.Label className="text-xl text-gray-500">
+                Publish Year
+              </Form.Label>
+              <Form.Control
+                type="number"
+                value={publishYear}
+                onChange={(e) => setPublishYear(e.target.value)}
+                className="border border-gray-500 px-4 py-2"
+              />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Button
+          variant="primary"
+          className="p-2 m-8 w-100"
+          onClick={handleSaveBook}
+        >
           Save
-        </button>
-      </div>
-    </div>
+        </Button>
+      </Form>
+    </Container>
   );
 };

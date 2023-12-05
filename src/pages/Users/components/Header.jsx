@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// import axios from "axios";
 import { VITE_API } from "../../../App.jsx";
+import { Navbar, Nav, Button } from "react-bootstrap";
 
 export const Header = () => {
   const [user, setuser] = useState(null);
@@ -35,37 +35,38 @@ export const Header = () => {
   }, [navigate]);
 
   return (
-    <header className="bg-gray-800 text-white p-4">
-      <div className="flex items-center justify-between">
-        <Link to="/" className="text-xl font-bold">
-          Your Logo
-        </Link>
-        <nav>
-          <ul className="flex space-x-4">
-            {isLoggedIn ? (
-              <>
-                <li>Hi {user.name} </li>
+    <Navbar bg="dark" variant="dark" expand="lg" className="mb-4">
+      <Navbar.Brand as={Link} to="/" className="text-xl font-weight-bold">
+        Your Logo
+      </Navbar.Brand>
+      <Navbar.Toggle aria-controls="navbar-nav" />
+      <Navbar.Collapse id="navbar-nav">
+        <Nav className="ml-auto">
+          {isLoggedIn ? (
+            <>
+              <Nav.Item className="mr-2">Hi {user.name}</Nav.Item>
 
-                <li>
-                  <Link to="/profile">Profile</Link>
-                </li>
-                <li>
-                  <button onClick={logout}>Logout</button>
-                </li>
-              </>
-            ) : (
-              <>
-                <li>
-                  <Link to="/login">Login</Link>
-                </li>
-                <li>
-                  <Link to="/register">Register</Link>
-                </li>
-              </>
-            )}
-          </ul>
-        </nav>
-      </div>
-    </header>
+              <Nav.Link as={Link} to="/profile">
+                Profile
+              </Nav.Link>
+              <Nav.Item>
+                <Button type="button" class="btn btn-dark" onClick={logout}>
+                  Logout
+                </Button>
+              </Nav.Item>
+            </>
+          ) : (
+            <>
+              <Nav.Link as={Link} to="/login">
+                Login
+              </Nav.Link>
+              <Nav.Link as={Link} to="/register">
+                Register
+              </Nav.Link>
+            </>
+          )}
+        </Nav>
+      </Navbar.Collapse>
+    </Navbar>
   );
 };

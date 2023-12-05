@@ -3,6 +3,7 @@ import axios from "axios";
 import Spinner from "../../components/Spinner";
 import { useNavigate } from "react-router-dom";
 import { VITE_API } from "../../App.jsx";
+import { Form, Button, Container, Row, Col } from "react-bootstrap";
 
 export const Update = () => {
   const [name, setName] = useState("");
@@ -68,81 +69,73 @@ export const Update = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-4 border rounded bg-white">
-      <h2 className="text-2xl font-bold mb-4">Update Profile</h2>
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <form className="max-w-md mx-auto" onSubmit={handleUpdate}>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="name"
-            >
-              Name
-            </label>
-            <input
-              className="border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="name"
-              type="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter name"
-            />
+    <Container className="mt-5">
+      <Row className="justify-content-center">
+        <Col xs={12} sm={10} md={8} lg={6}>
+          <div className="max-w-md mx-auto mt-8 p-4 border rounded bg-white">
+            <h2 className="text-2xl font-bold mb-4">Update Profile</h2>
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <Form onSubmit={handleUpdate}>
+                <Form.Group controlId="formName" className="mb-4">
+                  <Form.Label>Name</Form.Label>
+                  <Form.Control
+                    type="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter name"
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formEmail" className="mb-4">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter email"
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formPassword" className="mb-4">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter password"
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formConfirmPassword" className="mb-4">
+                  <Form.Label>Confirm Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirm(e.target.value)}
+                    placeholder="Confirm password"
+                  />
+                </Form.Group>
+
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="w-100"
+                  style={{
+                    backgroundColor: "#4158D0",
+                    backgroundImage:
+                      "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)",
+                    border: "none",
+                  }}
+                >
+                  Update Profile
+                </Button>
+              </Form>
+            )}
           </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              className="border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter email"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <input
-              className="border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="confirmPassword"
-            >
-              Confirm Password
-            </label>
-            <input
-              className="border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="confirmPassword"
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirm(e.target.value)}
-              placeholder="Confirm password"
-            />
-          </div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Update Profile
-          </button>
-        </form>
-      )}
-    </div>
+        </Col>
+      </Row>
+    </Container>
   );
 };

@@ -6,6 +6,7 @@ import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
 import { VITE_API } from "../../App.jsx";
+import { Container, Table, Button } from "react-bootstrap";
 
 export const HomePost = () => {
   const [posts, setPosts] = useState([]);
@@ -27,63 +28,66 @@ export const HomePost = () => {
   }, []);
 
   return (
-    <div className="p-4">
-      <div className="flex justify-between items-center">
-        <h1 className="text-3xl my-8">Posts List</h1>
+    <Container className="my-4">
+      <div className="d-flex justify-content-between align-items-center">
+        <h1 className="text-3xl text-primary">Posts List</h1>
         <Link to="/posts/create">
-          <MdOutlineAddBox className="text-sky-800 text-4xl" />
+          <Button variant="outline-primary" className="rounded-pill">
+            <MdOutlineAddBox className="text-primary" /> Add Post
+          </Button>
         </Link>
       </div>
+
       {isLoading ? (
         <Spinner />
       ) : (
-        <table className="w-full border-separate border-spacing-2">
+        <Table striped bordered hover responsive className="mt-4">
           <thead>
-            <tr>
-              <th className="border border-slate-600 rounded-md">No</th>
-              <th className="border border-slate-600 rounded-md">Title</th>
-              <th className="border border-slate-600 rounded-md max-md:hidden">
-                Description
-              </th>
-              <th className="border border-slate-600 rounded-md">Operations</th>
+            <tr className="text-center">
+              <th>No</th>
+              <th>Title</th>
+              <th className="d-none d-md-table-cell">Description</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {posts && posts.length > 0 ? (
               posts.map((post, index) => (
-                <tr key={post._id} className="h-8">
-                  <td className="border border-slate-700 rounded-md text-center">
-                    {index + 1}
-                  </td>
-                  <td className="border border-slate-700 rounded-md">
-                    {post.title}
-                  </td>
-                  <td className="border border-slate-700 rounded-md max-md:hidden">
-                    {post.description}
-                  </td>
-                  <td className="border border-slate-700 rounded-md">
-                    <Link to={`/posts/${post._id}`}>
-                      <BsInfoCircle className="text-sky-800 text-2xl mr-2" />
-                    </Link>
-                    <Link to={`/posts/edit/${post._id}`}>
-                      <AiOutlineEdit className="text-sky-800 text-2xl mr-2" />
-                    </Link>
-                    <Link to={`/posts/delete${post._id}`}>
-                      <MdOutlineDelete className="text-sky-800 text-2xl mr-2" />
-                    </Link>
+                <tr key={post._id}>
+                  <td>{index + 1}</td>
+                  <td>{post.title}</td>
+                  <td className="d-none d-md-table-cell">{post.description}</td>
+                  <td>
+                    <div className="d-flex justify-content-center gap-2">
+                      <Link to={`/posts/${post._id}`}>
+                        <Button variant="success" className="rounded-pill">
+                          <BsInfoCircle /> View
+                        </Button>
+                      </Link>
+                      <Link to={`/posts/edit/${post._id}`}>
+                        <Button variant="warning" className="rounded-pill">
+                          <AiOutlineEdit /> Edit
+                        </Button>
+                      </Link>
+                      <Link to={`/posts/delete/${post._id}`}>
+                        <Button variant="danger" className="rounded-pill">
+                          <MdOutlineDelete /> Delete
+                        </Button>
+                      </Link>
+                    </div>
                   </td>
                 </tr>
               ))
             ) : (
               <tr>
                 <td colSpan="4" className="text-center">
-                  No Post Found
+                  No Posts Found
                 </td>
               </tr>
             )}
           </tbody>
-        </table>
+        </Table>
       )}
-    </div>
+    </Container>
   );
 };

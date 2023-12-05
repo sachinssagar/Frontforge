@@ -1,6 +1,13 @@
+import React from "react";
+import { Spinner as BootstrapSpinner } from "react-bootstrap";
+
 const Spinner = () => {
   return (
-    <div className="animate-ping w-16 h-16 m-8 rounded-full bg-sky-600"></div>
+    <div className="d-flex justify-content-center align-items-center">
+      <BootstrapSpinner animation="border" variant="primary" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </BootstrapSpinner>
+    </div>
   );
 };
 

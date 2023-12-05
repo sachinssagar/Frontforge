@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Spinner from "../../components/Spinner.jsx";
 import { VITE_API } from "../../App.jsx";
+import { Button, Card, Container } from "react-bootstrap";
 
 export const Profile = () => {
   const [user, setUser] = useState(null);
@@ -32,37 +33,68 @@ export const Profile = () => {
         setLogin(false);
         console.log(err);
       });
-  }, []);
+  }, [navigate]);
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-4 border rounded bg-white">
-      <h2 className="text-2xl font-bold mb-4">User Profile</h2>
-      {isLoading ? (
-        <Spinner />
-      ) : login ? (
-        <div>
-          <p className="mb-2">
-            <span className="font-bold">Name:</span> {user.name}
-          </p>
-          <p className="mb-2">
-            <span className="font-bold">Email:</span> {user.email}
-          </p>
-          <Link to="/update">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Update Profile
-            </button>
-          </Link>
-        </div>
-      ) : (
-        <div>
-          <p>You are not logged in</p>
-          <Link to="/login">
-            <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-              Login
-            </button>
-          </Link>
-        </div>
-      )}
-    </div>
+    <Container className="mt-5">
+      <Card
+        className="mx-auto p-4 shadow"
+        style={{ backgroundColor: "#f4f4f4" }}
+      >
+        <Card.Title className="text-center text-2xl font-bold mb-4">
+          User Profile
+        </Card.Title>
+        {isLoading ? (
+          <Spinner />
+        ) : login ? (
+          <div>
+            <Card.Text
+              className="mb-2"
+              style={{ fontFamily: "Arial, sans-serif", fontSize: "18px" }}
+            >
+              <span className="font-bold">Name:</span> {user.name}
+            </Card.Text>
+            <Card.Text
+              className="mb-2"
+              style={{ fontFamily: "Arial, sans-serif", fontSize: "18px" }}
+            >
+              <span className="font-bold">Email:</span> {user.email}
+            </Card.Text>
+            <Link to="/update">
+              <Button
+                variant="primary"
+                className="w-100 mb-3"
+                style={{
+                  backgroundColor: "#ffa600",
+                  border: "none",
+                }}
+              >
+                Update Profile
+              </Button>
+            </Link>
+          </div>
+        ) : (
+          <div>
+            <Card.Text
+              style={{ fontFamily: "Arial, sans-serif", fontSize: "18px" }}
+            >
+              You are not logged in
+            </Card.Text>
+            <Link to="/login">
+              <Button
+                variant="primary"
+                className="w-100"
+                style={{
+                  backgroundColor: "#ffa600",
+                  border: "none",
+                }}
+              >
+                Login
+              </Button>
+            </Link>
+          </div>
+        )}
+      </Card>
+    </Container>
   );
 };

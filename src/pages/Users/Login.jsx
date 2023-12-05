@@ -3,6 +3,7 @@ import axios from "axios";
 import Spinner from "../../components/Spinner.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import { VITE_API } from "../../App.jsx";
+import { Form, Button, Container, Row, Col, Card } from "react-bootstrap";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -33,61 +34,64 @@ export const Login = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-4 border rounded bg-white">
-      <h2 className="text-2xl font-bold mb-4">Login</h2>
-      {isLoading && <Spinner />}
-      {!isLoading && (
-        <form className="max-w-md mx-auto" onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="email"
-            >
-              Email
-            </label>
-            <input
-              className="border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter email"
-              required
-            />
-          </div>
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <input
-              className="border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
-              id="password"
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Enter password"
-              required
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
-            >
+    <Container className="mt-5">
+      <Row className="justify-content-center">
+        <Col xs={12} sm={10} md={8} lg={6}>
+          <Card className="p-4 shadow-lg rounded">
+            <h2 className="text-center text-2xl font-bold mb-4 text-primary">
               Login
-            </button>
-            <Link
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800  cursor-pointer"
-              to="/register"
-            >
-              Register
-            </Link>
-          </div>
-        </form>
-      )}
-    </div>
+            </h2>
+            {isLoading && <Spinner />}
+            {!isLoading && (
+              <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="formEmail" className="mb-4">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter email"
+                    required
+                  />
+                </Form.Group>
+
+                <Form.Group controlId="formPassword" className="mb-4">
+                  <Form.Label>Password</Form.Label>
+                  <Form.Control
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Enter password"
+                    required
+                  />
+                </Form.Group>
+
+                <Button
+                  variant="primary"
+                  type="submit"
+                  className="w-100"
+                  style={{
+                    backgroundColor: "#4158D0",
+                    backgroundImage:
+                      "linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%)",
+                    border: "none",
+                  }}
+                >
+                  Login
+                </Button>
+                <div className="text-center mt-3">
+                  <Link
+                    className="align-baseline font-bold text-sm text-primary hover:text-dark"
+                    to="/register"
+                  >
+                    Don't have an account? Register here.
+                  </Link>
+                </div>
+              </Form>
+            )}
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   );
 };
