@@ -33,62 +33,61 @@ export const HomePost = () => {
   };
 
   return (
-    <Container className="my-4">
-      <div className="d-flex justify-content-between align-items-center">
-        <h1 className="text-3xl text-primary">Posts List</h1>
-        <Link to="/posts/create">
-          <Button variant="outline-primary" className="rounded-pill">
-            <MdOutlineAddBox className="text-primary" /> Add Post
-          </Button>
-        </Link>
-      </div>
+    <div style={{ backgroundColor: "#f0f0f0", minHeight: "100vh" }}>
+      <Container className="my-4">
+        <div className="d-flex justify-content-between align-items-center">
+          <h1 className="text-3xl text-primary">Posts List</h1>
+          <Link to="/posts/create">
+            <Button className="btn btn-light">
+              <MdOutlineAddBox className="text-primary" /> Add Post
+            </Button>
+          </Link>
+        </div>
 
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        <Row className="g-4 mt-4">
-          {posts && posts.length > 0 ? (
-            posts.map((post) => (
-              <Col key={post._id} xs={12}>
-                <Card>
-                  <Card.Body>
-                    <div className="d-flex">
-                      <div className="me-5 mr-5">
-                        <span className="me-1">
-                          {new Intl.DateTimeFormat("en-US", {
-                            month: "short",
-                          }).format(new Date(post.createdAt))}
-                        </span>
-                        <span>
-                          {new Date(post.createdAt).getDate()},
-                          {new Date(post.createdAt).getFullYear()}
-                        </span>
-                      </div>
-
-                      <div className="flex-grow-1">
-                        <div>
-                          <h5>{post.title}</h5>
-                          <p>{truncateDescription(post.description, 150)}</p>
-                          <Link
-                            to={`/posts/${post._id}`}
-                            className="btn btn-primary"
-                          >
-                            READ MORE
-                          </Link>
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <Row className="g-4 mt-4">
+            {posts && posts.length > 0 ? (
+              posts.map((post) => (
+                <Col key={post._id} xs={12}>
+                  <Card
+                    className="border-0"
+                    style={{ backgroundColor: "white" }}
+                  >
+                    <Card.Body>
+                      <div className="d-flex">
+                        <div className="flex-grow-1">
+                          <div>
+                            <h5>{post.title}</h5>
+                            <p className="text-muted mb-2">
+                              {new Intl.DateTimeFormat("en-US", {
+                                month: "short",
+                                day: "numeric",
+                              }).format(new Date(post.createdAt))}
+                            </p>
+                            <p>{truncateDescription(post.description, 150)}</p>
+                            <Link
+                              to={`/posts/${post._id}`}
+                              className="btn btn-primary"
+                            >
+                              READ MORE
+                            </Link>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Card.Body>
-                </Card>
-              </Col>
-            ))
-          ) : (
-            <div>
-              <p>No Posts Found</p>
-            </div>
-          )}
-        </Row>
-      )}
-    </Container>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              ))
+            ) : (
+              <div>
+                <p>No Posts Found</p>
+              </div>
+            )}
+          </Row>
+        )}
+      </Container>
+    </div>
   );
 };

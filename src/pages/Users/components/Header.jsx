@@ -37,7 +37,7 @@ export const Header = () => {
   return (
     <Navbar bg="dark" variant="dark" expand="lg" className="mb-4">
       <Navbar.Brand as={Link} to="/" className="text-xl font-weight-bold">
-        Your Logo
+        Logo
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="navbar-nav" />
       <Navbar.Collapse id="navbar-nav">
