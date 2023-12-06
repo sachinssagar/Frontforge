@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Spinner from "../../components/Spinner";
 import { Link } from "react-router-dom";
-import { AiOutlineEdit } from "react-icons/ai";
-import { BsInfoCircle } from "react-icons/bs";
-import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
+import { MdOutlineAddBox } from "react-icons/md";
+import { Container, Card, Button, Row, Col } from "react-bootstrap"; // Import Row and Col from react-bootstrap
 import { VITE_API } from "../../App.jsx";
-import { Container, Table, Button } from "react-bootstrap";
 
 export const HomePost = () => {
   const [posts, setPosts] = useState([]);
@@ -27,6 +25,13 @@ export const HomePost = () => {
       });
   }, []);
 
+  const truncateDescription = (description, maxLength) => {
+    if (description.length > maxLength) {
+      return `${description.slice(0, maxLength)}...`;
+    }
+    return description;
+  };
+
   return (
     <Container className="my-4">
       <div className="d-flex justify-content-between align-items-center">
@@ -41,52 +46,48 @@ export const HomePost = () => {
       {isLoading ? (
         <Spinner />
       ) : (
-        <Table striped bordered hover responsive className="mt-4">
-          <thead>
-            <tr className="text-center">
-              <th>No</th>
-              <th>Title</th>
-              <th className="d-none d-md-table-cell">Description</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {posts && posts.length > 0 ? (
-              posts.map((post, index) => (
-                <tr key={post._id}>
-                  <td>{index + 1}</td>
-                  <td>{post.title}</td>
-                  <td className="d-none d-md-table-cell">{post.description}</td>
-                  <td>
-                    <div className="d-flex justify-content-center gap-2">
-                      <Link to={`/posts/${post._id}`}>
-                        <Button variant="success" className="rounded-pill">
-                          <BsInfoCircle /> View
-                        </Button>
-                      </Link>
-                      <Link to={`/posts/edit/${post._id}`}>
-                        <Button variant="warning" className="rounded-pill">
-                          <AiOutlineEdit /> Edit
-                        </Button>
-                      </Link>
-                      <Link to={`/posts/delete/${post._id}`}>
-                        <Button variant="danger" className="rounded-pill">
-                          <MdOutlineDelete /> Delete
-                        </Button>
-                      </Link>
+        <Row className="g-4 mt-4">
+          {posts && posts.length > 0 ? (
+            posts.map((post) => (
+              <Col key={post._id} xs={12}>
+                <Card>
+                  <Card.Body>
+                    <div className="d-flex">
+                      <div className="me-5 mr-5">
+                        <span className="me-1">
+                          {new Intl.DateTimeFormat("en-US", {
+                            month: "short",
+                          }).format(new Date(post.createdAt))}
+                        </span>
+                        <span>
+                          {new Date(post.createdAt).getDate()},
+                          {new Date(post.createdAt).getFullYear()}
+                        </span>
+                      </div>
+
+                      <div className="flex-grow-1">
+                        <div>
+                          <h5>{post.title}</h5>
+                          <p>{truncateDescription(post.description, 150)}</p>
+                          <Link
+                            to={`/posts/${post._id}`}
+                            className="btn btn-primary"
+                          >
+                            READ MORE
+                          </Link>
+                        </div>
+                      </div>
                     </div>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan="4" className="text-center">
-                  No Posts Found
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
+                  </Card.Body>
+                </Card>
+              </Col>
+            ))
+          ) : (
+            <div>
+              <p>No Posts Found</p>
+            </div>
+          )}
+        </Row>
       )}
     </Container>
   );

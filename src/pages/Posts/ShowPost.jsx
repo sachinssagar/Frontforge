@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, Link } from "react-router-dom";
+import { Container, Button, Row, Col } from "react-bootstrap";
 import BackButton from "../../components/BackButton";
 import Spinner from "../../components/Spinner";
 import { VITE_API } from "../../App.jsx";
-import { Container, Form, Button } from "react-bootstrap";
 
 export const ShowPost = () => {
   const [post, setPost] = useState({});
@@ -29,72 +29,38 @@ export const ShowPost = () => {
   return (
     <Container className="my-4">
       <BackButton />
-      <h1 className="text-center display-4 text-primary mb-4">Post Details</h1>
       {isLoading ? (
         <Spinner />
       ) : (
-        <Form className="border border-primary rounded p-4">
-          <Form.Group controlId="formId" className="mb-4">
-            <Form.Label className="text-xl text-primary">
-              <strong>Id:</strong>
-            </Form.Label>
-            <Form.Control
-              type="text"
-              value={post._id}
-              readOnly
-              className="border border-primary p-2"
-            />
-          </Form.Group>
-          <Form.Group controlId="formTitle" className="mb-4">
-            <Form.Label className="text-xl text-primary">
-              <strong>Title:</strong>
-            </Form.Label>
-            <Form.Control
-              type="text"
-              value={post.title}
-              readOnly
-              className="border border-primary p-2"
-            />
-          </Form.Group>
-          <Form.Group controlId="formDescription" className="mb-4">
-            <Form.Label className="text-xl text-primary">
-              <strong>Description:</strong>
-            </Form.Label>
-            <Form.Control
-              type="text"
-              value={post.description}
-              readOnly
-              className="border border-primary p-2"
-            />
-          </Form.Group>
-          <Form.Group controlId="formCreateTime" className="mb-4">
-            <Form.Label className="text-xl text-primary">
-              <strong>Create Time:</strong>
-            </Form.Label>
-            <Form.Control
-              type="text"
-              value={new Date(post.createdAt).toLocaleString()}
-              readOnly
-              className="border border-primary p-2"
-            />
-          </Form.Group>
-          <Form.Group controlId="formUpdateTime" className="mb-4">
-            <Form.Label className="text-xl text-primary">
-              <strong>Last Update Time:</strong>
-            </Form.Label>
-            <Form.Control
-              type="text"
-              value={new Date(post.updatedAt).toLocaleString()}
-              readOnly
-              className="border border-primary p-2"
-            />
-          </Form.Group>
-          <Link to={`/posts/edit/${post._id}`}>
-            <Button variant="primary" className="w-100">
-              Edit Post
-            </Button>
-          </Link>
-        </Form>
+        <>
+          <div className="mt-4 ">
+            <Row className="text-center">
+              <Col>
+                <h5>{new Date(post.createdAt).toLocaleDateString()}</h5>
+                <h1>{post.title}</h1>
+              </Col>
+            </Row>
+            <Row className="mt-4">
+              <Col>
+                <p>{post.description}</p>
+              </Col>
+            </Row>
+          </div>
+          <div className="mt-4">
+            <Row>
+              <Col>
+                <Link to={`/posts/edit/${id}`}>
+                  <Button variant="outline-primary" className="me-2">
+                    Edit
+                  </Button>
+                </Link>
+                <Link to={`/posts/delete/${id}`}>
+                  <Button variant="outline-danger">Delete</Button>
+                </Link>
+              </Col>
+            </Row>
+          </div>
+        </>
       )}
     </Container>
   );
